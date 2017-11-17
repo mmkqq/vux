@@ -86,11 +86,13 @@ export default {
   watch: {
     currentValue (newValue, old) {
       if (newValue !== '') {
-        const a = newValue.toString().split('.')
-        if (a.length > 1 && a[1].length > 2) {
-          this.currentValue = parseFloat(a[0] + '.' + a[1].substring(0, 2))
+        if (newValue !== null && newValue !== undefined) {
+          const a = newValue.toString().split('.')
+          if (a.length > 1 && a[1].length > 2) {
+            this.currentValue = parseFloat(a[0] + '.' + a[1].substring(0, 2))
+          }
         }
-        if (typeof this.min !== 'undefined' && this.currentValue < this.min) {
+        if (typeof this.min !== 'undefined' && (this.currentValue < this.min || newValue === null || newValue === undefined)) {
           this.currentValue = this.min
         }
         if (this.max && this.currentValue > this.max) {
