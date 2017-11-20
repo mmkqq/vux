@@ -86,10 +86,14 @@ export default {
   watch: {
     currentValue (newValue, old) {
       if (newValue !== '') {
-        if (newValue !== null && newValue !== undefined) {
+        if (newValue !== null && newValue !== undefined && typeof this.point !== 'undefined') {
           const a = newValue.toString().split('.')
-          if (a.length > 1 && a[1].length > 2) {
-            this.currentValue = parseFloat(a[0] + '.' + a[1].substring(0, 2))
+          if (a.length > 1 && a[1].length > this.point) {
+            if (this.point === 0) {
+              this.currentValue = parseFloat(a[0])
+            } else {
+              this.currentValue = parseFloat(a[0] + '.' + a[1].substring(0, this.point))
+            }
           }
         }
         if (typeof this.min !== 'undefined' && (this.currentValue < this.min || newValue === null || newValue === undefined)) {
