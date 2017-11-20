@@ -27,6 +27,7 @@ export default {
   props: {
     min: Number,
     max: Number,
+    point: Number,
     readonly: Boolean,
     step: {
       type: Number,
