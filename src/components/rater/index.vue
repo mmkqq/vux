@@ -21,6 +21,10 @@ export default {
       type: Number,
       default: 5
     },
+    min: {
+      type: Number,
+      default: 0
+    },
     value: {
       type: Number,
       default: 0
@@ -63,6 +67,10 @@ export default {
           this.updateStyle()
         } else {
           this.currentValue = i + 1
+        }
+        if (this.min && this.currentValue < this.min) {
+          this.currentValue = this.min
+          this.updateStyle()
         }
       }
     },
